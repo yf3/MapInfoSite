@@ -2,7 +2,6 @@
 *.log
 *.pot
 *.pyc
-__pycache__/
 local_settings.py
 
 .env
@@ -13,6 +12,7 @@ db.sqlite3
 **/__pycache__/
 **/migrations/
 **/.vscode/**
+**/.devcontainer/**
 /public/media/
 
 .Python

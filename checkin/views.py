@@ -1,11 +1,13 @@
+from decouple import config
+
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
 from rest_framework.views import APIView
-from rest_framework.parsers import FileUploadParser, MultiPartParser
+from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
-from rest_framework.decorators import renderer_classes, permission_classes
+from rest_framework.decorators import renderer_classes
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
@@ -20,7 +22,7 @@ def chatroom(request):
     return render(request, 'chatroom.html')
 
 class IndexView(TemplateView):
-    
+    google_map_key = config('GOOGLE_MAP_KEY')
     template_name = 'index.html'
 
 class TestView(APIView):
