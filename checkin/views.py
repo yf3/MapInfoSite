@@ -22,7 +22,7 @@ def chatroom(request):
     return render(request, 'chatroom.html')
 
 class IndexView(TemplateView):
-    google_map_key = config('GOOGLE_MAP_KEY')
+    extra_context = {'google_map_key': config('GOOGLE_MAP_KEY')}
     template_name = 'index.html'
 
 class TestView(APIView):

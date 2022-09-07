@@ -7,7 +7,7 @@ class POIType(models.Model):
     name = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.name
+        return self.name.name
 
 class Attribute(models.Model):
     name = models.CharField(max_length=128)
@@ -15,7 +15,7 @@ class Attribute(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return self.name
+        return self.name.name
 
 class POI(models.Model):
     name = models.CharField(blank=True, default='No Title', max_length=128)
@@ -26,8 +26,7 @@ class POI(models.Model):
     latitude = models.FloatField(default=0)
     comment = models.CharField(blank=True, default='', max_length=1000)
     objects = models.Manager()
-        
-    def __str__(self):
-        return self.name
 
+    def __str__(self):
+        return self.name.name
     
