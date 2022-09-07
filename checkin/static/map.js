@@ -6,7 +6,7 @@ function initMap() {
     
     var markers = new Array();
 
-    downloadData("/upload/", function(request) {
+    downloadData("/poi/", function(request) {
         var data = JSON.parse(request.responseText);
         
         Array.prototype.forEach.call(data, function(element) {
