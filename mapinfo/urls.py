@@ -1,4 +1,4 @@
-"""managecenter URL Configuration
+"""mapinfo URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.conf.urls import include
 from django.views.static import serve
-from managecenter.settings import MEDIA_ROOT
+from mapinfo.settings import MEDIA_ROOT
 
 urlpatterns = [
     path('admin/', admin.site.urls),
