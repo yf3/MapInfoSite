@@ -7,19 +7,14 @@ from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
-from rest_framework.decorators import renderer_classes
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
 from .models import POI
 from .serializers import POISerializer, UserSerializer
 
-# def naive_index(request):
-#     all_places = Place.objects.all()
-#     return render(request, 'index.html', {'all_photos': all_places})
-
 def chatroom(request):
-    return render(request, 'chatroom.html')
+    return render(request, template_name='chatroom.html')
 
 class IndexView(TemplateView):
     extra_context = {'google_map_key': config('GOOGLE_MAP_KEY')}
@@ -33,9 +28,9 @@ class TestView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class POIView(APIView):
-    parser_class = (MultiPartParser, )
+    parser_classes = [MultiPartParser,]
+    renderer_classes = [JSONRenderer]
 
-    @renderer_classes((JSONRenderer))
     def get(self, request, format=None):
         query_set = POI.objects.all()
         serializer = POISerializer(query_set, many=True)
