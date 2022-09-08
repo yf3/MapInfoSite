@@ -7,7 +7,7 @@ class POIType(models.Model):
     name = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.name.name
+        return str(self.name)
 
 class Attribute(models.Model):
     name = models.CharField(max_length=128)
@@ -15,7 +15,7 @@ class Attribute(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return self.name.name
+        return str(self.name)
 
 class POI(models.Model):
     name = models.CharField(blank=True, default='No Title', max_length=128)
@@ -28,5 +28,5 @@ class POI(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return self.name.name
+        return str(self.name)
     

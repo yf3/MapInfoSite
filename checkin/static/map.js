@@ -79,19 +79,19 @@ function FilterControl(controlDiv, map, markers) {
     checkBox2Label.textContent = 'Show Tag2';
     controlUI.appendChild(checkBox2Label);
 
-    // controlCheckBox2.addEventListener('change', function() {
-    //     if (this.checked) {
-    //         markers.forEach(element => {
-    //             if (element.hasTag2) {
-    //                 element.setVisible(true);
-    //             }
-    //             else {
-    //                 element.setVisible(false);
-    //             }
-    //         });
-    //     }
-    //     else {
-    //         markers.forEach(element => element.setVisible(true));
-    //     }
-    // });
+    controlCheckBox2.addEventListener('change', function() {
+        if (this.checked) {
+            markers.forEach(element => {
+                if (element.hasTag2) {
+                    element.setVisible(true);
+                }
+                else {
+                    element.setVisible(false);
+                }
+            });
+        }
+        else {
+            markers.forEach(element => element.setVisible(true));
+        }
+    });
 }
