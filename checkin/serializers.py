@@ -8,14 +8,14 @@ class POISerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class POITypeSerializer(serializers.ModelSerializer):
-    pois = serializers.PrimaryKeyRelatedField(queryset=POI.objects.all(), many=True, read_only=False)
-    attributes = serializers.PrimaryKeyRelatedField(queryset=Attribute.objects.all(), many=True, read_only=False)
+    # pois = serializers.PrimaryKeyRelatedField(queryset=POI.objects.all(), many=True, read_only=False)
+    # attributes = serializers.PrimaryKeyRelatedField(queryset=Attribute.objects.all(), many=True, read_only=False)
+    class Meta:
+        model = POIType
+        fields = "__all__"
 
     def create(self, validated_data):
         return POIType(validated_data)
-
-    class Meta:
-        model = POIType
 
 class AttributeSerializer(serializers.ModelSerializer):
     class Meta:

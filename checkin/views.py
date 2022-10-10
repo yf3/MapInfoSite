@@ -10,8 +10,8 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
-from .models import POI
-from .serializers import POISerializer, UserSerializer
+from .models import POI, POIType
+from .serializers import POISerializer, UserSerializer, POITypeSerializer
 
 def chatroom(request):
     return render(request, template_name='chatroom.html')
@@ -26,6 +26,15 @@ class TestView(APIView):
     def post(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class POITypeView(APIView):
+    renderer_classes = [JSONRenderer]
+
+    def get(slef, request, format=None):
+        query_set = POIType.objects.all()
+        serializer = POITypeSerializer(query_set, many=True)
+        return Response(serializer.data)
+
 
 class POIView(APIView):
     parser_classes = [MultiPartParser,]
