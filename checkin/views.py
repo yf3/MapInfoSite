@@ -33,7 +33,7 @@ class POITypeView(APIView):
     def get(slef, request, format=None):
         query_set = POIType.objects.all()
         serializer = POITypeSerializer(query_set, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class POIView(APIView):
