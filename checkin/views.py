@@ -30,7 +30,7 @@ class TestView(APIView):
 class POITypeView(APIView):
     renderer_classes = [JSONRenderer]
 
-    def get(slef, request, format=None):
+    def get(self, request, format=None):
         query_set = POIType.objects.all()
         serializer = POITypeSerializer(query_set, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
