@@ -13,23 +13,9 @@ from rest_framework.permissions import IsAuthenticated
 from .models import POI, POIType
 from .serializers import POISerializer, UserSerializer, POITypeSerializer
 
-def chatroom(request):
-    return render(request, template_name='chatroom.html')
-
-class IndexView(TemplateView):
-    extra_context = {'google_map_key': config('GOOGLE_MAP_KEY')}
-    template_name = 'index.html'
-
-class TestView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
-        serializer = UserSerializer(request.user)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
 class POITypeView(APIView):
     renderer_classes = [JSONRenderer]
-
+    
     def get(self, request, format=None):
         query_set = POIType.objects.all()
         serializer = POITypeSerializer(query_set, many=True)
@@ -53,3 +39,17 @@ class POIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def chatroom(request):
+    return render(request, template_name='chatroom.html')
+
+class IndexView(TemplateView):
+    extra_context = {'google_map_key': config('GOOGLE_MAP_KEY')}
+    template_name = 'index.html'
+
+class TestView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data, status=status.HTTP_200_OK)

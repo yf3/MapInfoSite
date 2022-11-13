@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import POI, POIType, Attribute
+from .models import POI, POIType
 from django.contrib.auth.models import User
 
 class POISerializer(serializers.ModelSerializer):
@@ -17,11 +17,6 @@ class POITypeSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return POIType(validated_data)
-
-class AttributeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Attribute
-        fields = "__all__"
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
