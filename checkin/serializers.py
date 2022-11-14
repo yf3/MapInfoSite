@@ -3,14 +3,13 @@ from .models import POI, POIType
 from django.contrib.auth.models import User
 
 class POISerializer(serializers.ModelSerializer):
-    # poi_type = serializers.PrimaryKeyRelatedField(read_only=True)
+    # poi_type = serializers.PrimaryKeyRelatedField(allow_null=True, required=False, queryset=POIType.objects.all())
+
     class Meta:
         model = POI
         fields = "__all__"
 
 class POITypeSerializer(serializers.ModelSerializer):
-    # pois = serializers.PrimaryKeyRelatedField(queryset=POI.objects.all(), many=True, read_only=False)
-    # attributes = serializers.PrimaryKeyRelatedField(queryset=Attribute.objects.all(), many=True, read_only=False)
     class Meta:
         model = POIType
         fields = "__all__"

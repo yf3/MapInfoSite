@@ -10,17 +10,30 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
-from .models import POI, POIType
+from .models import POI, POIType, Map
 from .serializers import POISerializer, UserSerializer, POITypeSerializer
 
-class POITypeView(APIView):
+"""
+/map/ : map list
+/map/1/types/ : poi type list
+/map/1/poi/ : get poi list / post poi
+"""
+
+class MapList(APIView):
+    renderer_classes = [JSONRenderer]
+
+    def get(self, request, format=None):
+        query_set = Map.objects.all()
+        # TODO: serializer
+        return Response(status=status.HTTP_200_OK)
+
+class MapPoiTypeList(APIView):
     renderer_classes = [JSONRenderer]
     
-    def get(self, request, format=None):
-        query_set = POIType.objects.all()
+    def get(self, request, map_id, format=None):
+        query_set = POIType.objects.filter(map_id=map_id)
         serializer = POITypeSerializer(query_set, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
 
 class POIView(APIView):
     parser_classes = [MultiPartParser,]
