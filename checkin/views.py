@@ -39,8 +39,8 @@ class MapDetail(APIView):
 class MapPoiTypeList(APIView):
     renderer_classes = [JSONRenderer]
     
-    def get(self, request, map_id, format=None):
-        query_set = POIType.objects.filter(map_id=map_id)
+    def get(self, request, format=None):
+        query_set = POIType.objects.filter(map_id=request.query_params.get('map'))
         serializer = POITypeSerializer(query_set, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -48,8 +48,8 @@ class POIView(APIView):
     parser_classes = [MultiPartParser,]
     renderer_classes = [JSONRenderer]
 
-    def get(self, request, map_id, format=None):
-        query_set = POI.objects.filter(map_id=map_id)
+    def get(self, request, format=None):
+        query_set = POI.objects.filter(map_id=request.query_params.get('map'))
         serializer = POISerializer(query_set, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -61,6 +61,7 @@ class POIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 def chatroom(request):
     return render(request, template_name='chatroom.html')
